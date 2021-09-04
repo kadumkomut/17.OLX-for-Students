@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}
+    Show Chat
+{% endblock title %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block body %}
+
+<div class="container">
+
+    <div class="row" style="margin-top: 10px;">
+        
+        <div class="col-md-3 bg-dark border text-white" style="padding:20px 20px; background-image: url('https://i.stack.imgur.com/IehB7.png');">
+            <img src="/static/uploads/{{result[0][4]}}" style="width: 80%;margin: 0 auto;" alt="">
+            <p style="margin-top: 15px;text-transform: capitalize;font-size: 18px;">
+                <i class="material-icons" style="font-size: 15px;">add_shopping_cart</i> {{result[0][3]}} <br>
+                <i class="material-icons" style="font-size: 15px;">account_circle</i> {{result[0][1]}} <br>
+                <i class="material-icons" style="font-size: 15px;">location_on</i> {{result[0][2]}}
+            </p>
+
+        </div>
+
+        <div class="col-md-9 border" style="background-image: url('/static/messageBackground.jpg');">
+            <div class="bg-light p-2" id="messageBody" style="height: 430px;overflow-y: auto;background-image: url('/static/messageBackground.jpg');">
+                
+            </div>
+            <form action=""  id="messageForm" class="p-4" style="display: flex;">
+                <input type="text" autocomplete="off" id="messageInput" class="form-control" placeholder="type your message" >
+                <input type="hidden" id="chat_id" value="{{chat_id}}">
+                <input type="hidden" id="current_user_id" value="{{current_user_id}}">
+                <input type="submit" class="btn btn-primary" value="Send">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+    
+    var e = setInterval(function(){
+        fetchUser()
+    },5000)
+
+    fetchUser()
+
+    function fetchUser(){
+        $.ajax({
+            data: {
+                chat_id : $('#chat_id').val()
+            },
+            type: 'POST',
+            url : '/fetchMessage',
+            success: function(data){
+                var current_user_id = $('#current_user_id').val()
+                $('#messageBody').text("")
+                for(var x in data.result){
+                    if(data.result[x][1]==current_user_id){
+                        $('#messageBody')
+                        .append(`<div style="width:100%;display:flex;justify-content:flex-end;"><div class="p-3 bg-dark text-white" style="display:flex;justify-content:flex-end;border-radius:30px;float: right;background:lightgrey;display: flex;margin-bottom: 10px;">
+                                <p>${data.result[x][0]}</p>
+                                <img src="/static/avatar1.jpg" style="margin-left:10px;width: 58px;height: 58px;border-radius: 50%;" alt=""></div></div>`)
+                    }else{
+                        $('#messageBody')
+                        .append(`<div style="width:100%;display:flex;justify-content:flex-start;"><div class="p-3" style="border-radius:30px;float: left;background:lightgrey;display: flex;margin-bottom: 10px;">
+                            <img src="/static/avatar.jpg" style="width: 58px;height: 58px;border-radius: 50%;margin-right: 10px;" alt="">
+                            <p>${data.result[x][0]}</p>
+                            </div></div>`)
+                    }
+                }
+                $('#messageBody').append('<div id="scrollThere" style="color:white;float:left;width:10%;padding:10px;"></div>')
+                document.querySelector('#scrollThere').scrollIntoView({
+                    behavior: 'smooth' 
+                });
+                
+            }
+        })
+    }
+
+    $('#click').click(function(event){
+        fetchUser()
+    })
+    // sending message form
+    $('#messageForm').on('submit',function(event){
+        event.preventDefault();
+        $.ajax({
+            data:{
+                message: $('#messageInput').val(),
+                chat_id : $('#chat_id').val()
+            },
+            type: 'POST', 
+            url : '/sendMessage',
+            success:function(data){
+                if (data.message=="done"){
+                    $('#messageInput').val("")
+                    document.querySelector('#scrollThere').scrollIntoView({
+                    behavior: 'smooth' 
+                });
+                    fetchUser();
+                }else{
+                    alert("Error sending message")
+                }
+            }
+        })
+    });
+
+});
+
+</script>
+
+
+
+
+
+{% endblock body %}

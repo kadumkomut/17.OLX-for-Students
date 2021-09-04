@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}
+    HOME
+{% endblock title %}
+{% block activeHome %}
+    active
+{% endblock activeHome %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block body %}
+
+    
+<div class="container overflow-hidden" style="margin-top: 20px;">
+    <div class="row gy-5">
+       {% for value in result %}
+        <div class="col-lg-4 col-md-5 col-sm-6" style="margin-bottom: 70px;width: 400px;height: 400px;">
+            <div class="card p-3 border" style="background: rgb(230, 227, 227);border-radius: 10px;">
+                <div style="display: flex;justify-content: center;align-items: center;width: 200px;height: 200px;margin: 0 auto;">
+                    <img src="/static/uploads/{{value[10]}}" style="width: 200px;max-height: 200px;" alt="...">
+                </div>
+                <div class="card-body" >
+                  <p class="card-title">
+                    <span style="font-size: 1.2rem;font-weight: bold;">&#8377;  {{value[6]}}</span> 
+                    <br> 
+                    {{value[4].upper()}}
+                  </p>
+                  <p class="card-text">
+                      <i class="material-icons" style="font-size: 15px;">account_circle</i> {{value[11].capitalize()}}
+                      <br>
+                      <i class="material-icons" style="font-size: 15px;">location_on</i> {{value[0].capitalize()}}
+                      <br>
+                      <a type="button" class="btn btn-secondary" href="/view/{{value[1]}}" style="margin-top: 7px;">
+                          view
+                      </a>
+                      <button data-toggle="modal" data-target="#myModal{{value[2]}}" type="button" style="margin-top: 7px;" class="btn btn-success right">
+                            Offer &#8649;	
+                      </button>
+                      <!-- The Modal -->
+                      <div class="modal fade" id="myModal{{value[2]}}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                          
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{{value[4].upper()}}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                              <form action="/offer" method="POST">
+                                <label for=""><h5>Initial Price - &#8377; {{value[6]}}</h5></label>
+                                <input type="hidden" value="{{value[1]}}" name="p_id">
+                                <input type="hidden" value="{{value[2]}}" name="receiver_id">
+                                <input type="text" name="message" autocomplete="off" class="form-control" id="exampleFormControlInput1" placeholder="Send offer with a message">
+                                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Send</button>
+                              </form>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal ends -->
+                  </p>
+                </div>
+              </div>
+        </div>
+       {% endfor %} 
+       
+    </div>
+  </div>
+    
+{% endblock body %}

@@ -1,0 +1,18 @@
+.w3-hover-dark:hover {
+    background:lightgray!important;
+}
+
+.profile_link {
+    padding:5px 10px;
+    background: white;
+    color:black!important;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.profile_link:hover {
+    background: rgb(19, 180, 19);
+    color: white !important;
+    text-decoration: none;
+    text-transform: capitalize;
+}

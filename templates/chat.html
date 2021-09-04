@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+    Chat
+{% endblock title %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block activeChat %}
+    active
+{% endblock activeChat %}
+{% block body %}
+
+<div class="container">
+<div class="row">
+  <div class="col-lg-9">
+
+  
+  <div class="list-group">
+    {% for values in result  %}
+      <a href="/showchat/{{values[2]}}" 
+      class="bg-light  bg-gradient list-group-item border border-5 shadow list-group-item-action"
+      style="position:relative;padding:4px 100px;display: flex;justify-content: flex-start;align-items: center;">
+      <div style="position: relative;margin-right: 30px;">
+        <img src="/static/uploads/{{values[7]}}" style="height: 60px;width: 60px;" alt="">
+        <img src="/static/uploads/{{values[6]}}" style="height: 40px;width: 40px;border-radius: 50%;position: absolute;right: -16px;bottom: -10px;" alt="">
+      </div>
+      <div style="margin-top:12px;margin-right: 20px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
+        <h4>{{values[0]}}</h4>
+        <p>{{values[4]}}</p>
+      </div>
+      <div style="position: absolute;right: 100px;display: flex;align-items: center;">
+        <p class="badge bg-primary p-3 text-white">{{values[5]}}</p>
+      </div>
+    </a>
+    {% endfor %}
+
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}
+    VIEW
+{% endblock title %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block body %}
+
+<div class="container">
+    <div class="row" style="background: lightgrey;">
+        <div class="col-md-4 p-3 " >
+            <img src="/static/uploads/{{result[0][11]}}" style="width: 100%;border-radius: 10px;" alt="">
+        </div>
+        <div class="col-md-8 p-3 ">
+            <ul class="list-group">
+                <li class="list-group-item active bg-dark" aria-current="true">
+                    {% if result[0][3]!=current_user_id %}
+                        About the product
+                    {% else %}
+                        Your Product
+                    {% endif %}
+                </li>
+                <li class="list-group-item"><b>Name - <b style="font-size: large;">{{result[0][4].capitalize()}}</b></b></li>
+                <li class="list-group-item"><b>Price - <b style="font-size: large;">Rs {{result[0][7]}}</b></b></li>
+                <li class="list-group-item"><b>Category - <b style="font-size: large;">{{result[0][8].capitalize()}}</b></b></li>
+                <li class="list-group-item"><b>User - <b style="font-size: large;">{{result[0][0].capitalize()}}</b></b></li>
+                <li class="list-group-item"><b>Description - <b style="font-size: large;">{{result[0][6]}}</b></b></li>
+                <li class="list-group-item"><b>Date - <b style="font-size: large;">{{result[0][9]}}</b></b></li>
+                <li class="list-group-item"><b>Location - <b style="font-size: large;">{{result[0][1].capitalize()}}</b></b></li>
+                {% if result[0][3]!=current_user_id %}
+                    <!-- Show offer button only when the user is vewing other prodcuts -->
+                    <li class="list-group-item">
+                        <button data-toggle="modal" data-target="#myModal{{result[0][2]}}" type="button" class="btn btn-success right">
+                            Offer &#8649;
+                        </button>
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal{{result[0][2]}}">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">{{result[0][4].upper()}}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                <form action="/offer" method="POST">
+                                    <label for=""><h5>Initial Price - &#8377; {{result[0][7]}}</h5></label>
+                                    <input type="hidden" value="{{result[0][2]}}" name="p_id">
+                                    <input type="hidden" value="{{result[0][3]}}" name="receiver_id">
+                                    <input type="text" name="message" autocomplete="off" class="form-control" id="exampleFormControlInput1" placeholder="Send offer with a message">
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Send</button>
+                                </form>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Modal ends -->
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+{% endblock body %}

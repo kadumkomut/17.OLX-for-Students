@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}
+    Sell
+{% endblock title %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block activeSell %}
+    active   
+{% endblock activeSell %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6  border p-3" style="background: lightgrey;font-size: 1.2rem;font-weight: bold;">
+            <form action="/postsubmit" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for=""><b>@</b> Post Title</label>
+                    <input type="text" name="p_title" autocomplete="off" class="form-control" placeholder="enter post title" required>
+                </div>
+                <div class="form-group">
+                    <label for=""><b>@</b> Product Name</label>
+                    <input type="text" name="p_name" autocomplete="off" class="form-control" placeholder="enter product name" required>
+                </div>
+                <div class="form-group">
+                    <label for=""><b>@</b> Price</label>
+                    <input type="number" name="p_price" autocomplete="off" class="form-control" placeholder="enter price in rs" required>
+                </div>
+                <div class="form-group">
+                    <label for=""><b>@</b> Category</label>
+                    <select class="form-control" name="p_category" required>
+                        <option value="books">Books</option>
+                        <option value="stationary">Stationary</option>
+                        <option value="mobiles">Mobiles</option>
+                        <option value="sportandhobbies">Sport and Hobbies</option>
+                        <option value="services">Services</option>
+                        <option value="bikes">Bikes</option>
+                        <option value="computerandelectronics">Computer and Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for=""><b>@</b> Description</label>
+                    <textarea type="text" name="p_description" rows="3" autocomplete="off" class="form-control" placeholder="product description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for=""> <b>@</b> Type</label>
+                    <select class="form-control" name="p_type" required>
+                        <option value="1">Sell</option>
+                        <option value="2">Exchange</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for=""><b>@</b> Picture</label><br>
+                    <input type="file" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary float-right btn-lg">Post &#9654;</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+
+
+{% endblock body %}

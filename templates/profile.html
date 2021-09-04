@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block externalcss %}
+    <link rel="stylesheet" href="/static/profile.css">
+{% endblock externalcss %}
+{% block title %}
+    Profile
+{% endblock title %}
+{% block userName %}
+ {{session_user_name}}
+{% endblock userName %}
+{% block body %}
+
+    <div class="container " style="margin-top: 10px;padding: 10px;">
+        <div class="row justify-content-md-center" style="border: 1px solid lightgrey;padding: 30px;box-shadow: -3px 3px 19px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: -3px 3px 19px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: -3px 3px 19px 0px rgba(0,0,0,0.75);">
+          <div class="col-4 colLeft border">
+              <img src="/static/uploads/{{user_picture}}" class="profile-image" alt="">
+              <form action="/profileimage" method = "POST" enctype = "multipart/form-data">
+                <input type="file" class="form-control" name="file" required>
+                <button type="submit" class="form-control btn bg-danger text-white">Update Picture</button>
+              </form>
+          </div>
+          <div class="col-6">
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true">
+                    <i class="material-icons">insert_emoticon</i> Personal Information
+                    <span style="float: right;"></span>
+                </li>
+                <li class="list-group-item">Name : <b>{{user_name}}</b></li>
+                <li class="list-group-item">Email : <b>{{user_email}}</b></li>
+                <li class="list-group-item">Join On : <b>{{user_joined_date}}</b></li>
+                <li class="list-group-item">College : <b>{{user_college}}</b></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    
+{% endblock body %}

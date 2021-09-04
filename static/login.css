@@ -1,0 +1,33 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('/static/background.jpg');
+    display: grid;
+    place-items: center;
+}
+
+.login {
+    width: 500px !important;
+    border-radius: 20px;
+    background-color: lightgray;
+    padding: 40px 40px;
+    box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+}
+
+.register {
+    width: 500px !important;
+    border-radius: 20px;
+    background-color: lightgray;
+    padding: 20px 40px;
+    box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 66px 0px rgba(0,0,0,0.75);
+}
+
+.login > .title {
+    padding: 4px;
+}
+

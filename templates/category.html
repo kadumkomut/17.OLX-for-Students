@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+    Category
+{% endblock title %}
+{% block userName %}
+    {{session_user_name}}
+{% endblock userName %}
+{% block activeCategory %}
+    active
+{% endblock activeCategory %}
+{% block body %}
+
+<div class="container" >
+<div class="list-group container" style="width: 600px;float: left;">
+    <a href="/showcategory/books" class="list-group-item list-group-item-action">
+        <i class="material-icons">library_books</i> Books 
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/stationary" class="list-group-item list-group-item-action list-group-item-primary">
+        <i class="material-icons">content_cut</i> Stationary
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/mobiles" class="list-group-item list-group-item-action list-group-item-secondary">
+        <i class="material-icons">phone_android</i> Mobiles
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/sportandhobbies" class="list-group-item list-group-item-action list-group-item-success">
+        <i class="material-icons">brush</i> Sports & Hobbies
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/services" class="list-group-item list-group-item-action list-group-item-danger">
+        <i class="material-icons">card_travel</i> Services
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/bikes" class="list-group-item list-group-item-action list-group-item-warning">
+        <i class="material-icons">directions_bike</i> Bikes
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/computerandelectronics" class="list-group-item list-group-item-action list-group-item-info">
+       <i class="material-icons">computer</i> Computer & Electronics
+       <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/fashion" class="list-group-item list-group-item-action list-group-item-light">
+        <i class="material-icons">add_shopping_cart</i> Fashion
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+    <a href="/showcategory/other" class="list-group-item list-group-item-action list-group-item-dark">
+        <i class="material-icons">all_inclusive</i> Other
+        <i class="material-icons" style="float: right;">keyboard_arrow_right</i>
+    </a>
+  </div>
+</div>
+    
+{% endblock body %}

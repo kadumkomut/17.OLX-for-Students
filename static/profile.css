@@ -1,0 +1,23 @@
+.profile-image {
+    /* height: 250px;
+    width: 250px; */
+    width: 100%;
+    height: 100%;
+    /* border-radius: 50%; */
+}
+
+.colLeft {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+}
+.colLeft > form {
+    padding: 10px;
+}
+.colLeft > form > input {
+    margin-bottom: 10px;
+}
+.colLeft > form > button {
+    border-radius: 20px;
+}
